@@ -16,7 +16,11 @@ var disguise = (function () {
         return encryptedHex;
     };
     disguise.prototype.decode = function (message) {
-        //
+        var encryptedBytes = aesjs.utils.hex.toBytes(message);
+        var aesCbc = new aesjs.ModeOfOperation.cbc(this.key, this.iv);
+        var decryptedBytes = aesCbc.decrypt(encryptedBytes);
+        var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+        return decryptedText.replace(/~/g, '');
     };
     disguise.e = function (key, salt, message) {
         var h = new disguise(key, salt);
@@ -32,4 +36,3 @@ var disguise = (function () {
     return disguise;
 }());
 module.exports = disguise;
-

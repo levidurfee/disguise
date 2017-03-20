@@ -22,7 +22,11 @@ class disguise {
     }
 
     decode(message) {
-        //
+        var encryptedBytes = aesjs.utils.hex.toBytes(message);
+        var aesCbc = new aesjs.ModeOfOperation.cbc(this.key, this.iv);
+        var decryptedBytes = aesCbc.decrypt(encryptedBytes);
+        var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+        return decryptedText.replace(/~/g, '');
     }
 
     static e(key, salt, message) {
