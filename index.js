@@ -32,3 +32,4 @@ var disguise = (function () {
     return disguise;
 }());
 module.exports = disguise;
+
