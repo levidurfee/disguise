@@ -6,14 +6,18 @@ class disguise {
     private key;
     private iv;
 
-    constructor(key, salt) {
+    constructor(key, salt, iv = "") {
         this.key = pbkdf2.pbkdf2Sync(key, salt, 1, 256 / 8, 'sha512');
-        this.iv = [
-            24, 79, 78, 76,
-            15, 86, 57, 64,
-            14,  3, 43, 33,
-            25, 51, 56, 24,
-        ];
+        if(iv.length == 16) {
+            this.iv = iv;
+        } else {
+            this.iv = [
+                24, 79, 78, 76,
+                15, 86, 57, 64,
+                14,  3, 43, 33,
+                25, 51, 56, 24,
+            ];
+        }
         return this;
     }
 
