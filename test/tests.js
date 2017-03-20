@@ -2,12 +2,13 @@ var assert = require('assert');
 var dsg = require('../index.js');
 
 var d = new dsg('levi', 'salt');
-var decrypted = d.decode('e4c3a5432de89e20c3914d748d20c686');
+var hex = 'fc3c1c70e142b65abf66a790b87d9945';
+var decrypted = d.decode(hex);
 
 describe('Disguise', function() {
     describe('e()', function() {
         it('should return an encrypted string', function() {
-            assert.equal('e4c3a5432de89e20c3914d748d20c686',
+            assert.equal(hex,
                 dsg.e('levi', 'salt', 'message')
             );
         });

@@ -4,7 +4,12 @@ var pbkdf2 = require('pbkdf2');
 var disguise = (function () {
     function disguise(key, salt) {
         this.key = pbkdf2.pbkdf2Sync(key, salt, 1, 256 / 8, 'sha512');
-        this.iv = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+        this.iv = [
+            24, 79, 78, 76,
+            15, 86, 57, 64,
+            14, 3, 43, 33,
+            25, 51, 56, 24,
+        ];
         return this;
     }
     disguise.prototype.encode = function (message) {
